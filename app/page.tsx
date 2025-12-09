@@ -2,15 +2,6 @@
 
 import { useState } from "react";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "./components/ui/select";
-import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -68,23 +59,9 @@ export default function Home() {
           );
         })}
       </div>
-      <div className="p-6 max-w-7xl mx-auto">
-        <div className="flex flex-col items-center">
-          <h2 className="text-xl font-semibold mb-2">Select year</h2>
-          <Select value={year} onValueChange={setYear}>
-            <SelectTrigger className="w-[280px]">
-              <SelectValue placeholder="select year" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Year</SelectLabel>
-                <SelectItem value="2025">2025</SelectItem>
-                <SelectItem value="2024">2024</SelectItem>
-                <SelectItem value="2023">2023</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="mt-20 max-w-7xl mx-auto">
+        <h1 className="-5 text-4xl font-semibold">Draw your Art</h1>
+        <p className="mt-1 dark:text-[#d4d4d4]">Paint your idea and let the script bring it to life</p>
       </div>
     </div>
   );
