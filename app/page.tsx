@@ -8,9 +8,19 @@ import {
 } from "./components/ui/tooltip";
 import { Input } from "./components/ui/input";
 import { inputFields } from "./constants";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import PaintArea from "./components/PaintArea";
 
 export default function Home() {
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState();
   const [formData, setFormData] = useState({
     "github-token": "",
     username: "",
@@ -22,22 +32,22 @@ export default function Home() {
   };
 
   return (
-    <div className="text-center mt-10">
+    <div className="mt-10 text-center">
       <h2 className="text-3xl font-bold">Enter your details</h2>
       <p className="mt-1 dark:text-[#d4d4d4]">
         All data will be stored locally and no one but you will be able to
         access it.
       </p>
 
-      <div className="flex sm:flex-row flex-col gap-5 justify-center mx-auto mt-8 max-w-4xl">
+      <div className="flex flex-col gap-5 justify-center px-4 mx-auto mt-8 max-w-4xl sm:flex-row">
         {inputFields.map((field) => {
           const IconComponent = field.icon;
           return (
             <div key={field.id} className="flex-1">
-              <div className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <div className="flex gap-2 items-center mb-2 text-sm font-semibold">
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <span className="inline-flex items-center gap-1 cursor-help">
+                    <span className="inline-flex gap-1 items-center cursor-help">
                       <IconComponent className="w-4 h-4" />
                       {field.label}
                     </span>
@@ -59,9 +69,33 @@ export default function Home() {
           );
         })}
       </div>
-      <div className="mt-20 max-w-7xl mx-auto">
-        <h1 className="-5 text-4xl font-semibold">Draw your Art</h1>
-        <p className="mt-1 dark:text-[#d4d4d4]">Paint your idea and let the script bring it to life</p>
+      <div className="px-5 mx-auto mt-20 max-w-7xl">
+        <h1 className="text-4xl font-semibold -5">Draw your Art</h1>
+        <p className="mt-1 dark:text-[#d4d4d4]">
+          Paint your idea and let the script bring it to life
+        </p>
+        <div className="flex flex-col items-center mt-20">
+          <Select>
+            <SelectTrigger className="w-full max-w-[1035px]">
+              <SelectValue placeholder="select year" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Year</SelectLabel>
+                <SelectItem value="2025">2025</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+                <SelectItem value="2023">2023</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <div className="flex justify-center w-full">
+            <div className="overflow-x-auto">
+              <div className="mx-auto min-w-max">
+                <PaintArea />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
