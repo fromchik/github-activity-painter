@@ -20,10 +20,9 @@ export function formatISO(d: Date) {
   return d.toISOString().slice(0, 10);
 }
 
-/** Генерация всех дат для календаря года (начало недели с воскресенья) */
 export function generateDatesForYear(year: number): string[] {
   const jan1 = startOfYear(year);
-  const dayOfWeek = jan1.getUTCDay(); // 0 = Sunday
+  const dayOfWeek = jan1.getUTCDay(); 
   const start = addDays(jan1, -dayOfWeek);
   const dates: string[] = [];
   for (let i = 0; i < 53 * 7; i++) {

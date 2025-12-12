@@ -1,32 +1,39 @@
-
 import { GridStore } from "@/lib/types";
 import { initialCells, isFutureDate } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
 export const useGridStore = create<GridStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       year: new Date().getUTCFullYear(),
       cells: initialCells(new Date().getUTCFullYear()),
 
-      setYear: (y) => set({ year: y, cells: initialCells(y) }),
+      currentLevel: 1,
+      isDrawing: false,
+      setDrawing: (v: boolean) => set({ isDrawing: v }),
+      setCurrentLevel: (lvl) => set({ currentLevel: lvl }),
 
-      setCellLevel: (date, level) => {
-        if (isFutureDate(date)) return;
-        set((s) => ({
-          cells: s.cells.map((c) => (c.date === date ? { ...c, level } : c)),
-        }));
-      },
-      cycleCell: (date) => {
-        if (isFutureDate(date)) return;
-        set((s) => ({
-          cells: s.cells.map((c) =>
-            c.date === date ? { ...c, level: (c.level + 1) % 5 } : c
-          ),
-        }));
-      },
+      setYear: (y) => set({ year: y, cells: initialCells(y) }),
+      setCellLevel: (date) =>
+        set((s) => {
+          if (isFutureDate(date)) return s;
+          return {
+            cells: s.cells.map((c) =>
+              c.date === date ? { ...c, level: s.currentLevel } : c
+            ),
+          };
+        }),
+
+      cycleCell: (date) =>
+        set((s) => {
+          if (isFutureDate(date)) return s;
+          return {
+            cells: s.cells.map((c) =>
+              c.date === date ? { ...c, level: (s.currentLevel + 1) % 5 } : c
+            ),
+          };
+        }),
 
       clear: () =>
         set((s) => ({
@@ -42,14 +49,15 @@ export const useGridStore = create<GridStore>()(
         set({ cells: filtered });
       },
 
-      paintCells: (dates, level) => {
-        const filteredDates = dates.filter((d) => !isFutureDate(d));
-        set((s) => ({
-          cells: s.cells.map((c) =>
-            filteredDates.includes(c.date) ? { ...c, level } : c
-          ),
-        }));
-      },
+      paintCells: (dates) =>
+        set((s) => {
+          const valid = dates.filter((d) => !isFutureDate(d));
+          return {
+            cells: s.cells.map((c) =>
+              valid.includes(c.date) ? { ...c, level: s.currentLevel } : c
+            ),
+          };
+        }),
     }),
     { name: "github-activity-painter" }
   )
