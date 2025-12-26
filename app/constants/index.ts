@@ -2,7 +2,7 @@ import { KeyRound, Mail, User } from "lucide-react";
 
 export const inputFields = [
   {
-    id: "github-token",
+    id: "githubToken",
     icon: KeyRound,
     label: "Github Token",
     placeholder: "Enter your Github token",
@@ -33,4 +33,12 @@ export const cellDarkThemePallete = [
   "#196c2e",
   "#2ea043",
   "#56d364",
+];
+
+export const cellLightThemePallete = [
+  "#f9f9f9",
+  "#e5e5e5",
+  "#d4d4d4",
+  "#b3b3b3",
+  "#808080",
 ];

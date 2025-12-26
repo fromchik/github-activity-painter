@@ -15,9 +15,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center my-4">
-      <div className="flex gap-2 items-center ml-3">
+    <div className="flex justify-between items-center my-4  mx-4">
         <Github width={32} height={32} className="dark:text-[#d4d4d4]" />
+      <div className="flex gap-2 items-center ml-3">
         <h1 className="text-2xl font-semibold sm:text-3xl dark:text-[#d4d4d4]">
           Github Activity Painter
         </h1>

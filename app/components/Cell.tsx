@@ -7,19 +7,18 @@ type CellProps = {
   cell: Cell;
 };
 
-const Cell = ({ cell }: CellProps) => {
+const CellComponent = ({ cell }: CellProps) => {
   const setCellLevel = useGridStore((s) => s.setCellLevel);
-  const currentLevel = useGridStore((s) => s.currentLevel);
   const isDrawing = useGridStore((s) => s.isDrawing);
   const setDrawing = useGridStore((s) => s.setDrawing);
-
+  
   const isFuture = isFutureDate(cell.date);
-
+  
   const paint = () => {
     if (isFuture) return;
-    setCellLevel(cell.date, currentLevel);
+    setCellLevel(cell.date); 
   };
-
+  
   return (
     <button
       disabled={isFuture}
@@ -43,5 +42,4 @@ const Cell = ({ cell }: CellProps) => {
   );
 };
 
-
-export default Cell;
+export default CellComponent;

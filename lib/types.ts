@@ -1,25 +1,28 @@
-export type Cell = {
+export interface Cell {
   date: string;
   level: number;
-};
+}
 
-export type GridStore = {
-  year: number;                   
-  cells: Cell[];                  
-  currentLevel: number;           
-  setCurrentLevel: (lvl: number) => void;
+export interface UserData {
+  githubToken: string;
+  username: string;
+  email: string;
+}
 
-  isDrawing: boolean;            
+export interface GridStore {
+  year: number;
+  cells: Cell[];
+  currentLevel: number;
+  isDrawing: boolean;
   setDrawing: (v: boolean) => void;
-
+  setCurrentLevel: (lvl: number) => void;
   setYear: (y: number) => void;
-  setCellLevel: (date: string, level: number) => void;
+  setCellLevel: (date: string, level?: number) => void; 
   cycleCell: (date: string) => void;
   clear: () => void;
   importJson: (data: Cell[]) => void;
   paintCells: (dates: string[]) => void;
-};
-
+}
 
 export const GITHUB_PALETTE = [
   "#ebedf0",
