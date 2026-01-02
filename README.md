@@ -100,10 +100,10 @@ Once you love your drawing:
 ---
 
 ## 📸 Screenshots
-
-
-    ![Screenshot](https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h56m58s_screenshot.png?raw=true)
-    ![Screenshot](https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h57m41s_screenshot.png?raw=true)
+<p align="center">
+  <img src="https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h56m58s_screenshot.png?raw=true" width="400" />
+  <img src="https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h57m41s_screenshot.png?raw=true" width="400" />
+</p>
 
 ---
 
