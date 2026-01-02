@@ -102,8 +102,8 @@ Once you love your drawing:
 ## 📸 Screenshots
 
 <div align="center">
-    ![Screenshot](./public/260102_13h56m58s_screenshot.png)
-    ![Screenshot](./public/260102_13h57m41s_screenshot.png)
+![Screenshot 1](public/260102_13h56m58s_screenshot.png)
+![Screenshot 2](public/260102_13h57m41s_screenshot.png)
 </div>
 
 ---
