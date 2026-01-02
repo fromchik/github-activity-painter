@@ -5,8 +5,6 @@
 
 <div align="center">
 
-<img src="./public/logo.png" alt="GitHub Activity Painter Logo" width="120" height="120">
-
 ### Turn your GitHub contribution graph into pixel art!
 
 **Run locally • Draw visually • Commit in one click**
@@ -39,9 +37,9 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your computer.
 ### Installation
 
 1. **Clone the repository** (or download the ZIP):
-   ```bash
-   git clone [https://github.com/fromchik/github-activity-painter.git](https://github.com/fromchik/github-activity-painter.git)
-   cd github-activity-painter
+```bash
+git clone [https://github.com/fromchik/github-activity-painter.git](https://github.com/fromchik/github-activity-painter.git)
+cd github-activity-painter
 
 
 2. **Install dependencies:**
@@ -104,7 +102,8 @@ Once you love your drawing:
 ## 📸 Screenshots
 
 <div align="center">
-
+    ![Screenshot](./public/260102_13h56m58s_screenshot.png)
+    ![Screenshot](./public/260102_13h57m41s_screenshot.png)
 </div>
 
 ---

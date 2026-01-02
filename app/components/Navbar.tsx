@@ -3,6 +3,7 @@
 import { Button } from "@/app/components/ui/button";
 import { Github, Moon, Notebook, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
@@ -23,9 +24,11 @@ const Navbar = () => {
         </h1>
       </div>
       <div className="flex gap-2 mr-5">
-        <Button variant={"outline"}>
+          <Link href="https://github.com/fromchik/github-activity-painter/blob/main/README.md">
+        <Button variant={"outline"} >
           <Notebook />
         </Button>
+          </Link>
         <Button
           variant={"outline"}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
