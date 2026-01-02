@@ -43,7 +43,6 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your computer.
    git clone [https://github.com/fromchik/github-activity-painter.git](https://github.com/fromchik/github-activity-painter.git)
    cd github-activity-painter
 
-```
 
 2. **Install dependencies:**
 ```bash
@@ -123,6 +122,3 @@ Once you love your drawing:
 
 </div>
 
-```
-
-```
