@@ -101,10 +101,9 @@ Once you love your drawing:
 
 ## 📸 Screenshots
 
-<div align="center">
+
     ![Screenshot](https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h56m58s_screenshot.png?raw=true)
     ![Screenshot](https://github.com/fromchik/github-activity-painter/blob/main/public/260102_13h57m41s_screenshot.png?raw=true)
-</div>
 
 ---
 
