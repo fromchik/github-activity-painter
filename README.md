@@ -1,6 +1,6 @@
 
 
-```markdown
+
 # 🎨 GitHub Activity Painter
 
 <div align="center">
