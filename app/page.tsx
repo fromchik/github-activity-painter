@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "./components/ui/tooltip";
 import { Input } from "./components/ui/input";
-import { cellDarkThemePallete, inputFields } from "./constants";
+import { inputFields, themes } from "./constants";
 import {
   Select,
   SelectContent,
@@ -19,11 +19,15 @@ import {
 } from "./components/ui/select";
 import PaintArea from "./components/PaintArea";
 import { Button } from "./components/ui/button";
-import { useGridStore } from "./components/store/gridStore";
+import { useGridStore } from "./store/gridStore";
 import { UserData } from "@/lib/types";
 import { toast } from "sonner";
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
   const [formData, setFormData] = useState<UserData>({
     githubToken: "",
     username: "",
@@ -39,6 +43,17 @@ export default function Home() {
 
   const hasPaintedCells = useGridStore((s) => s.cells.some((c) => c.level > 0));
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  const currentPalette = mounted
+    ? resolvedTheme === "light"
+      ? themes.light.cells
+      : themes.dark.cells
+    : themes.dark.cells;
+
   const handleInputChange = (id: string, value: string) => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
@@ -50,15 +65,21 @@ export default function Home() {
       return;
     }
 
-    const paintedCells = cells.filter(c => c.level > 0);
-    
+    const paintedCells = cells.filter((c) => c.level > 0);
+
     console.log("Total cells:", cells.length);
     console.log("Painted cells:", paintedCells.length);
-    console.log("Sample dates:", paintedCells.slice(0, 5).map(c => `${c.date}: level ${c.level}`));
-    console.log("🎨 Levels distribution:", paintedCells.reduce((acc, c) => {
-      acc[c.level] = (acc[c.level] || 0) + 1;
-      return acc;
-    }, {} as Record<number, number>));
+    console.log(
+      "Sample dates:",
+      paintedCells.slice(0, 5).map((c) => `${c.date}: level ${c.level}`)
+    );
+    console.log(
+      "🎨 Levels distribution:",
+      paintedCells.reduce((acc, c) => {
+        acc[c.level] = (acc[c.level] || 0) + 1;
+        return acc;
+      }, {} as Record<number, number>)
+    );
 
     if (paintedCells.length === 0) {
       toast.error("No painted cells to commit!");
@@ -81,28 +102,30 @@ export default function Home() {
           year: year,
         }),
       });
-      
+
       const data = await res.json();
       console.log("API Response:", data);
-      
+
       if (res.ok) {
-        toast.success(`Successfully committed! Created ${data.stats?.successful} commits`);
+        toast.success(
+          `Successfully committed! Created ${data.stats?.successful} commits`
+        );
         setFormData((prev) => ({ ...prev, githubToken: "" }));
       } else {
         toast.error("Failed to commit: " + (data.error || res.statusText));
       }
-    } catch(e) {
+    } catch (e) {
       toast.error("Failed to commit");
       console.error(e);
     }
   };
 
   const exportData = () => {
-    const paintedCells = cells.filter(c => c.level > 0);
+    const paintedCells = cells.filter((c) => c.level > 0);
     const dataStr = JSON.stringify(paintedCells, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `github-activity-${year}.json`;
     link.click();
@@ -177,20 +200,27 @@ export default function Home() {
         </div>
         <div className="flex justify-between mt-2 mx-auto">
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-muted-foreground">Select intensity level:</p>
+            <p className="text-sm text-muted-foreground">
+              Select intensity level:
+            </p>
             <div className="flex gap-1">
-              {cellDarkThemePallete.map((color, index) => (
+              {currentPalette.map((color, index) => (
                 <button
-                  key={color}
+                  key={`${color}-${index}`}
                   className={`w-7 h-7 rounded-sm border-2 hover:scale-110 transition-all ${
-                    currentLevel === index 
-                      ? 'ring-2 ring-blue-500 ring-offset-2' 
-                      : ''
+                    currentLevel === index
+                      ? "ring-2 ring-blue-500 ring-offset-2"
+                      : ""
                   }`}
                   style={{ backgroundColor: color }}
                   onClick={() => setCurrentLevel(index)}
+                  aria-label={`Set intensity level ${index}`}
                 >
-                  <p className="text-xs font-bold">{index}</p>
+                  <p
+                    className={"text-xs font-bold text-black dark:text-white "}
+                  >
+                    {index}
+                  </p>
                 </button>
               ))}
             </div>
@@ -202,8 +232,11 @@ export default function Home() {
         {hasPaintedCells && (
           <div className="mt-4 space-y-2">
             <div className="text-sm text-muted-foreground">
-              📊 Painted cells: {cells.filter(c => c.level > 0).length} | 
-              Total commits: {cells.filter(c => c.level > 0).reduce((sum, c) => sum + c.level, 0)}
+              📊 Painted cells: {cells.filter((c) => c.level > 0).length} |
+              Total commits:{" "}
+              {cells
+                .filter((c) => c.level > 0)
+                .reduce((sum, c) => sum + c.level, 0)}
             </div>
             <div className="flex gap-2 justify-center">
               <Button variant="outline" onClick={exportData}>

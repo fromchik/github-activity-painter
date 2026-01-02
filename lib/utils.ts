@@ -20,6 +20,7 @@ export function formatISO(d: Date) {
   return d.toISOString().slice(0, 10);
 }
 
+
 export function generateDatesForYear(year: number): string[] {
   const jan1 = startOfYear(year);
   const dayOfWeek = jan1.getUTCDay(); 

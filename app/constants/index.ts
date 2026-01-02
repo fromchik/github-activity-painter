@@ -26,19 +26,16 @@ export const inputFields = [
     type: "email",
   },
 ];
+export const themes = {
+  dark: {
+    cells: ["#18181b", "#033a16", "#196c2e", "#2ea043", "#56d364"],
+    futureCell: "#3f3f46",
+  },
+  light: {
+    cells: ["#f9f9f9", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+    futureCell: "#ebedf0",
+  },
+} as const;
 
-export const cellDarkThemePallete = [
-  "#18181b",
-  "#033a16",
-  "#196c2e",
-  "#2ea043",
-  "#56d364",
-];
-
-export const cellLightThemePallete = [
-  "#f9f9f9",
-  "#e5e5e5",
-  "#d4d4d4",
-  "#b3b3b3",
-  "#808080",
-];
+export const cellDarkThemePallete = themes.dark.cells;
+export const cellLightThemePallete = themes.light.cells;

@@ -23,11 +23,3 @@ export interface GridStore {
   importJson: (data: Cell[]) => void;
   paintCells: (dates: string[]) => void;
 }
-
-export const GITHUB_PALETTE = [
-  "#ebedf0",
-  "#9be9a8",
-  "#40c463",
-  "#30a14e",
-  "#216e39",
-];
